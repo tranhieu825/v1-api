@@ -11,7 +11,7 @@ export class CommonRoute {
     // Phân trang chính
      app
       .route("/v1/api/page/:page_id")
-      .get(isAuth,this.commonController.getPerPage);
+      .post(isAuth,this.commonController.getPerPage);
 
     // Phân trang theo category
      app

@@ -9,6 +9,7 @@ export class CommonController{
   getPerPage = async (req:Request, res: Response) => {
     try {
       let perPage: any = 2; // số lượng bài post xuất hiện trên 1 page
+      console.log(perPage)
       let page_id: any = req.params.page_id || 1; 
       Post.find() // find tất cả các data
       .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
