@@ -52,7 +52,7 @@ import { CommonRoute } from './module/common_module/routes/common.routes';
     }
 
     settings() {
-        this.app.set('port', 4000);
+        this.app.set('port', process.env.PORT || 4000 );
     }
 
     middlewares() {
