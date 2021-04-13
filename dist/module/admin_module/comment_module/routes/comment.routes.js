@@ -8,7 +8,6 @@ class CommentRoute_admin {
         this.commentController = new comment_Controller_1.CommentController();
     }
     routes(app) {
-        // Tạo comment
         app
             .route("/v1/api/admin/category/:category_id/post/:post_id/comment")
             .get(auth_middleware_1.isAuth, this.commentController.getAllComment);

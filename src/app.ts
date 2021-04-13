@@ -21,8 +21,6 @@ import { CategoryRoute_admin } from './module/admin_module/category_module/route
 import { PostRoute_admin } from './module/admin_module/post_module/routes/post.routes';
 import { CommentRoute_admin } from './module/admin_module/comment_module/routes/comment.routes';
 
-// Xử lý common
-import { CommonRoute } from './module/common_module/routes/common.routes';
 
  class Applicaction {
 
@@ -39,9 +37,6 @@ import { CommonRoute } from './module/common_module/routes/common.routes';
     public categoryRoute_admin: CategoryRoute_admin = new CategoryRoute_admin();
     public postRoute_admin: PostRoute_admin = new PostRoute_admin();
     public commentRoute_admin: CommentRoute_admin = new CommentRoute_admin();
-
-    // Common
-    public commonRoute: CommonRoute = new CommonRoute();
 
 
     constructor() {
@@ -85,9 +80,6 @@ import { CommonRoute } from './module/common_module/routes/common.routes';
          this.categoryRoute_member.routes(this.app);
          this.postRoute_member.routes(this.app);
          this.commentRoute_member.routes(this.app);
-
-         // Common
-         this.commonRoute.routes(this.app);
 
          // admin
          this.adminRoute_admin.routes(this.app);

@@ -20,7 +20,7 @@ class PostRoute_member {
             .route("/v1/api/user/category/:category_id/post/:post_id")
             .put(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(post_dto_1.PostUpdateSchema), this.postController.updatePost)
             .delete(auth_middleware_1.isAuth, this.postController.deletePost);
-        // Phân trang chính
+        // Phân trang 
         app
             .route("/v1/api/user/post")
             .get(auth_middleware_1.isAuth, this.postController.getPerPage);

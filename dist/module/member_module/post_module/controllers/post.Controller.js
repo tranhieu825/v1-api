@@ -104,7 +104,7 @@ class PostController {
                 return response_service_1.error(res, "Error", 200);
             }
         });
-        // Phân trang trang chính
+        // Phân trang 
         this.getPerPage = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const p = req.query.size; // số lượng bài post xuất hiện trên 1 page\

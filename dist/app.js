@@ -20,8 +20,6 @@ const user_routes_2 = require("./module/admin_module/user_module/routes/user.rou
 const category_routes_2 = require("./module/admin_module/category_module/routes/category.routes");
 const post_routes_2 = require("./module/admin_module/post_module/routes/post.routes");
 const comment_routes_2 = require("./module/admin_module/comment_module/routes/comment.routes");
-// Xử lý common
-const common_routes_1 = require("./module/common_module/routes/common.routes");
 class Applicaction {
     constructor() {
         // member
@@ -34,8 +32,6 @@ class Applicaction {
         this.categoryRoute_admin = new category_routes_2.CategoryRoute_admin();
         this.postRoute_admin = new post_routes_2.PostRoute_admin();
         this.commentRoute_admin = new comment_routes_2.CommentRoute_admin();
-        // Common
-        this.commonRoute = new common_routes_1.CommonRoute();
         this.app = express_1.default();
         this.settings();
         this.middlewares();
@@ -68,8 +64,6 @@ class Applicaction {
         this.categoryRoute_member.routes(this.app);
         this.postRoute_member.routes(this.app);
         this.commentRoute_member.routes(this.app);
-        // Common
-        this.commonRoute.routes(this.app);
         // admin
         this.adminRoute_admin.routes(this.app);
         this.categoryRoute_admin.routes(this.app);

@@ -20,7 +20,7 @@ class MemberRoute_member {
             .post(validatebody_middlewares_1.commonValidateBody(user_dto_1.UserLoginSchema), this.userController.loginUser);
         // Đăng xuất
         app
-            .route("/v1/api/logout")
+            .route("/v1/api/user/logout")
             .get(auth_middleware_1.isAuth, this.userController.logoutUser);
         // Xem thông tin cá nhân và thay đổi mật khẩu
         app
@@ -28,7 +28,7 @@ class MemberRoute_member {
             .get(auth_middleware_1.isAuth, this.userController.getUser)
             .patch(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(user_dto_1.UserChangeSchema), this.userController.updateUser);
         // Refest token
-        app.route("/v1/api/refresh-token").post(this.userController.refreshToken);
+        app.route("/v1/api/user/refresh-token").post(this.userController.refreshToken);
     }
 }
 exports.MemberRoute_member = MemberRoute_member;
