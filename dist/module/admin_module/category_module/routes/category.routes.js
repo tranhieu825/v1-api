@@ -11,11 +11,11 @@ class CategoryRoute_admin {
     }
     routes(app) {
         app
-            .route("/v1/api/category")
+            .route("/v1/api/admin/category")
             .get(auth_middleware_1.isAuth, this.categoryController.getAllCategory)
             .post(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(category_dto_1.CategoryCreateSchema), this.categoryController.createCategory);
         app
-            .route("/v1/api/category/:category_id")
+            .route("/v1/api/admin/category/:category_id")
             .put(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(category_dto_1.CategoryUpdateSchema), this.categoryController.updateCategory)
             .delete(auth_middleware_1.isAuth, this.categoryController.deleteCategory);
     }

@@ -9,7 +9,7 @@ class CategoryRoute_member {
     }
     routes(app) {
         app
-            .route("/v1/api/category")
+            .route("/v1/api/user/category")
             .get(auth_middleware_1.isAuth, this.categoryController.getAllCategory);
     }
 }

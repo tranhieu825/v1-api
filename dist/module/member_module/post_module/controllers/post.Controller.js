@@ -104,15 +104,60 @@ class PostController {
                 return response_service_1.error(res, "Error", 200);
             }
         });
-        // Search dữ liệu
+        // Phân trang trang chính
+        this.getPerPage = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const p = req.query.size; // số lượng bài post xuất hiện trên 1 page\
+                const perPage = parseInt(p);
+                const page_id = req.query.page || 1;
+                const category_id = req.query.category_id;
+                if (category_id) {
+                    post_model_1.Post.find({ category_id: category_id }) // find theo category
+                        .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+                        .limit(perPage)
+                        .exec((err, post) => {
+                        post_model_1.Post.countDocuments((err, count) => {
+                            if (err)
+                                return response_service_1.error(res, "Error");
+                            return response_service_1.success(res, post); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+                        });
+                    });
+                }
+                post_model_1.Post.find() // find tất cả các data
+                    .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+                    .limit(perPage)
+                    .exec((err, post) => {
+                    post_model_1.Post.countDocuments((err, count) => {
+                        if (err)
+                            return response_service_1.error(res, "Error");
+                        return response_service_1.success(res, post); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+                    });
+                });
+            }
+            catch (err) {
+                return response_service_1.error(res, "Error", 200);
+            }
+        });
+        // Phân trang theo search
         this.getAllSearch = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const searchBody = req.body.title;
-                const result = yield post_model_1.Post.find({
+                const p = req.query.size; // số lượng bài post xuất hiện trên 1 page\
+                const perPage = parseInt(p);
+                const page_id = req.query.page || 1;
+                const searchBody = req.query.keyword;
+                const search = post_model_1.Post.find({
                     $text: { $search: searchBody }
+                }, "title")
+                    .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+                    .limit(perPage)
+                    .exec((err, post) => {
+                    post_model_1.Post.countDocuments((err, count) => {
+                        if (err)
+                            return response_service_1.error(res, "Error");
+                        console.log(post);
+                        return response_service_1.success(res, post);
+                    });
                 });
-                console.log(result);
-                return response_service_1.success(res, result);
             }
             catch (err) {
                 return response_service_1.error(res, "Error", 200);

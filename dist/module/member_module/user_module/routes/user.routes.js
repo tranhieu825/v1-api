@@ -12,15 +12,11 @@ class MemberRoute_member {
     routes(app) {
         // Đăng kí user
         app
-            .route("/v1/api/signup")
+            .route("/v1/api/user/signup")
             .post(validatebody_middlewares_1.commonValidateBody(user_dto_1.UserCreateSchema), this.userController.createUser);
         // Đăng nhập user
         app
-            .route("/v1/api/login")
-            .post(validatebody_middlewares_1.commonValidateBody(user_dto_1.UserLoginSchema), this.userController.loginUser);
-        // Index
-        app
-            .route("/v1/api")
+            .route("/v1/api/user/login")
             .post(validatebody_middlewares_1.commonValidateBody(user_dto_1.UserLoginSchema), this.userController.loginUser);
         // Đăng xuất
         app
@@ -28,7 +24,7 @@ class MemberRoute_member {
             .get(auth_middleware_1.isAuth, this.userController.logoutUser);
         // Xem thông tin cá nhân và thay đổi mật khẩu
         app
-            .route("/v1/api/info")
+            .route("/v1/api/user/:id")
             .get(auth_middleware_1.isAuth, this.userController.getUser)
             .patch(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(user_dto_1.UserChangeSchema), this.userController.updateUser);
         // Refest token

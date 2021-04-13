@@ -11,7 +11,7 @@ export class CategoryRoute_member {
   public routes(app: express.Application): void {
     
     app
-      .route("/v1/api/category")
+      .route("/v1/api/user/category")
       .get(isAuth,this.categoryController.getAllCategory)
   }
 }

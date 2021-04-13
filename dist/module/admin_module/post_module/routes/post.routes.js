@@ -8,12 +8,11 @@ class PostRoute_admin {
         this.postController = new post_Controller_1.PostController();
     }
     routes(app) {
-        // Tạo category
         app
-            .route("/v1/api/category/:category_id/post")
+            .route("/v1/api/admin/category/:category_id/post")
             .get(auth_middleware_1.isAuth, this.postController.getAllPost);
         app
-            .route("/v1/api/category/:category_id/post/:post_id")
+            .route("/v1/api/admin/category/:category_id/post/:post_id")
             .delete(auth_middleware_1.isAuth, this.postController.deletePost);
     }
 }

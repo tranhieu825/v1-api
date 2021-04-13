@@ -12,11 +12,11 @@ class CommentRoute_member {
     routes(app) {
         // Tạo comment
         app
-            .route("/v1/api/category/:category_id/post/:post_id/comment")
+            .route("/v1/api/user/category/:category_id/post/:post_id/comment")
             .get(auth_middleware_1.isAuth, this.commentController.getAllComment)
             .post(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(comment_dto_1.CommentCreateSchema), this.commentController.createComment);
         app
-            .route("/v1/api/category/:category_id/post/:post_id/comment/:comment_id")
+            .route("/v1/api/user/category/:category_id/post/:post_id/comment/:comment_id")
             .put(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(comment_dto_1.CommentUpdateSchema), this.commentController.updateComment)
             .delete(auth_middleware_1.isAuth, this.commentController.deleteComment);
     }

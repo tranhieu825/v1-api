@@ -10,15 +10,15 @@ class CommonRoute {
     routes(app) {
         // Phân trang chính
         app
-            .route("/v1/api/page/:page_id")
+            .route("/v1/api/post")
             .get(auth_middleware_1.isAuth, this.commonController.getPerPage);
         // Phân trang theo category
         app
-            .route("/v1/api/category/:category_id/page/:page_id")
+            .route("/v1/api/category")
             .get(auth_middleware_1.isAuth, this.commonController.getPerPageCategory);
         // Search
         app
-            .route("/v1/api/search/:page_id")
+            .route("/v1/api/search")
             .get(auth_middleware_1.isAuth, this.commonController.getAllSearch);
     }
 }

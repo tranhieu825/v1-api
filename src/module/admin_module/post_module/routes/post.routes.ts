@@ -9,13 +9,13 @@ import { isAuth } from "../../../../middlewares/auth.middleware";
 export class PostRoute_admin {
   public postController: PostController = new PostController();
   public routes(app: express.Application): void {
-    // Tạo category
+    
     app
-      .route("/v1/api/category/:category_id/post")
+      .route("/v1/api/admin/category/:category_id/post")
       .get(isAuth,this.postController.getAllPost)
     
     app
-      .route("/v1/api/category/:category_id/post/:post_id")
+      .route("/v1/api/admin/category/:category_id/post/:post_id")
       .delete(isAuth, this.postController.deletePost);
   }
 }

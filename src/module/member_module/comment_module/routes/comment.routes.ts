@@ -11,7 +11,7 @@ export class CommentRoute_member {
   public routes(app: express.Application): void {
     // Tạo comment
     app
-      .route("/v1/api/category/:category_id/post/:post_id/comment")
+      .route("/v1/api/user/category/:category_id/post/:post_id/comment")
       .get(isAuth,this.commentController.getAllComment)
       .post(
           isAuth,
@@ -20,7 +20,7 @@ export class CommentRoute_member {
       );
 
     app
-      .route("/v1/api/category/:category_id/post/:post_id/comment/:comment_id")
+      .route("/v1/api/user/category/:category_id/post/:post_id/comment/:comment_id")
       .put(
           isAuth,
           commonValidateBody(CommentUpdateSchema),

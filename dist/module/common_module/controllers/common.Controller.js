@@ -17,8 +17,9 @@ class CommonController {
         // Phân trang trang chính
         this.getPerPage = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let perPage = 2; // số lượng bài post xuất hiện trên 1 page
-                let page_id = req.params.page_id || 1;
+                const p = req.query.size; // số lượng bài post xuất hiện trên 1 page\
+                const perPage = parseInt(p);
+                const page_id = req.query.page || 1;
                 post_model_1.Post.find() // find tất cả các data
                     .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
                     .limit(perPage)
@@ -37,9 +38,10 @@ class CommonController {
         // Phân trang theo category
         this.getPerPageCategory = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let perPage = 2; // số lượng bài post xuất hiện trên 1 page
-                let page_id = req.params.page_id || 1;
-                const category_id = req.params.category_id;
+                const p = req.query.size; // số lượng bài post xuất hiện trên 1 page\
+                const perPage = parseInt(p);
+                const page_id = req.query.page || 1;
+                const category_id = req.query.category_id;
                 post_model_1.Post.find({
                     category_id: category_id,
                 }) // find post theo category
@@ -60,19 +62,21 @@ class CommonController {
         // Phân trang theo search
         this.getAllSearch = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
-                let perPage = 2; // số lượng bài post xuất hiện trên 1 page
-                let page_id = req.params.page_id || 1;
-                const searchBody = req.body.title;
+                const p = req.query.size; // số lượng bài post xuất hiện trên 1 page\
+                const perPage = parseInt(p);
+                const page_id = req.query.page || 1;
+                const searchBody = req.query.keyword;
                 const search = post_model_1.Post.find({
                     $text: { $search: searchBody }
-                }, "title") // find post theo category
+                }, "title")
                     .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
                     .limit(perPage)
                     .exec((err, post) => {
                     post_model_1.Post.countDocuments((err, count) => {
                         if (err)
                             return response_service_1.error(res, "Error");
-                        return response_service_1.success(res, search);
+                        console.log(post);
+                        return response_service_1.success(res, post);
                     });
                 });
             }

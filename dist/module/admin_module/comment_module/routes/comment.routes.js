@@ -10,10 +10,10 @@ class CommentRoute_admin {
     routes(app) {
         // Tạo comment
         app
-            .route("/v1/api/category/:category_id/post/:post_id/comment")
+            .route("/v1/api/admin/category/:category_id/post/:post_id/comment")
             .get(auth_middleware_1.isAuth, this.commentController.getAllComment);
         app
-            .route("/v1/api/category/:category_id/post/:post_id/comment/:comment_id")
+            .route("/v1/api/admin/category/:category_id/post/:post_id/comment/:comment_id")
             .delete(auth_middleware_1.isAuth, this.commentController.deleteComment);
     }
 }

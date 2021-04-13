@@ -12,17 +12,21 @@ class PostRoute_member {
     routes(app) {
         // Tạo bài post, xem tất cả bài post của mình
         app
-            .route("/v1/api/category/:category_id/post")
+            .route("/v1/api/user/category/:category_id/post")
             .get(auth_middleware_1.isAuth, this.postController.getAllPost)
             .post(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(post_dto_1.PostCreateSchema), this.postController.createPost);
         // Update 1 bài post
         app
-            .route("/v1/api/category/:category_id/post/:post_id")
+            .route("/v1/api/user/category/:category_id/post/:post_id")
             .put(auth_middleware_1.isAuth, validatebody_middlewares_1.commonValidateBody(post_dto_1.PostUpdateSchema), this.postController.updatePost)
             .delete(auth_middleware_1.isAuth, this.postController.deletePost);
-        // Tìm kiếm bài post
+        // Phân trang chính
         app
-            .route("/v1/api/search")
+            .route("/v1/api/user/post")
+            .get(auth_middleware_1.isAuth, this.postController.getPerPage);
+        // Search
+        app
+            .route("/v1/api/user/search")
             .get(auth_middleware_1.isAuth, this.postController.getAllSearch);
     }
 }

@@ -12,7 +12,7 @@ export class PostRoute_member {
 
     // Tạo bài post, xem tất cả bài post của mình
     app
-      .route("/v1/api/category/:category_id/post")
+      .route("/v1/api/user/category/:category_id/post")
       .get(isAuth,this.postController.getAllPost)
       .post(
           isAuth,
@@ -22,17 +22,23 @@ export class PostRoute_member {
     
     // Update 1 bài post
     app
-      .route("/v1/api/category/:category_id/post/:post_id")
+      .route("/v1/api/user/category/:category_id/post/:post_id")
       .put(
         isAuth,
         commonValidateBody(PostUpdateSchema),
         this.postController.updatePost
       )
       .delete(isAuth, this.postController.deletePost);
+
     
-    // Tìm kiếm bài post
-    app
-      .route("/v1/api/search")
+    // Phân trang 
+     app
+      .route("/v1/api/user/post")
+      .get(isAuth,this.postController.getPerPage);
+
+    // Search
+     app
+      .route("/v1/api/user/search")
       .get(isAuth,this.postController.getAllSearch);
   }
 }

@@ -137,16 +137,67 @@ public postService: PostService = new PostService(Post);
     }
    }
 
-  // Search dữ liệu
 
-  getAllSearch = async (req:Request, res: Response) => {
+  // Phân trang 
+  
+  getPerPage = async (req:Request, res: Response) => {
     try {
-      const searchBody = req.body.title;
-      const result = await Post.find({
-         $text:{ $search: searchBody } }
-        )
-      console.log(result);
-        return success(res,result);
+      const p: any = req.query.size// số lượng bài post xuất hiện trên 1 page\
+      const perPage = parseInt(p)
+      const page_id: any = req.query.page || 1; 
+      const category_id: any = req.query.category_id;
+      if(category_id)
+      {
+      Post.find( {category_id: category_id }) // find theo category
+      .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+      .limit(perPage)
+      .exec((err, post) => {
+      Post.countDocuments((err, count) => { // đếm để tính có bao nhiêu trang
+          if (err) return error(res,"Error");
+          return success(res,post); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+        });
+      });
+      
+        }
+       Post.find() // find tất cả các data
+      .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+      .limit(perPage)
+      .exec((err, post) => {
+      Post.countDocuments((err, count) => { // đếm để tính có bao nhiêu trang
+          if (err) return error(res,"Error");
+          return success(res,post); // Trả về dữ liệu các sản phẩm theo định dạng như JSON, XML,...
+        });
+      });
+      
+      }
+    catch (err) {
+      return error(res, "Error", 200);
+    }
+  }
+
+
+
+  // Phân trang theo search
+
+   getAllSearch = async (req:Request, res: Response) => {
+    try {
+      const p: any = req.query.size// số lượng bài post xuất hiện trên 1 page\
+      const perPage = parseInt(p)
+      const page_id: any = req.query.page || 1; 
+      const searchBody: any = req.query.keyword;
+      const search= Post.find({
+            $text:{ $search: searchBody }
+          } , "title" ) 
+      .skip((perPage * page_id) - perPage) // Trong page đầu tiên sẽ bỏ qua giá trị là 0
+      .limit(perPage)
+      .exec((err, post) => {
+      Post.countDocuments((err, count) => { // đếm để tính có bao nhiêu trang
+          if (err) return error(res,"Error");
+          console.log(post)
+          return success(res,post); 
+        });
+      });
+      
         }
     catch (err) {
       return error(res, "Error", 200);

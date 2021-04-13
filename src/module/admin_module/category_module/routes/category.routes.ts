@@ -11,7 +11,7 @@ export class CategoryRoute_admin {
   public routes(app: express.Application): void {
     
     app
-      .route("/v1/api/category")
+      .route("/v1/api/admin/category")
       .get(isAuth,this.categoryController.getAllCategory)
       .post(
           isAuth,
@@ -19,7 +19,7 @@ export class CategoryRoute_admin {
           this.categoryController.createCategory
       );
     app
-      .route("/v1/api/category/:category_id")
+      .route("/v1/api/admin/category/:category_id")
       .put(
         isAuth,
         commonValidateBody(CategoryUpdateSchema),

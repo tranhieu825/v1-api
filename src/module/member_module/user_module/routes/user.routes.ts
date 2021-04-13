@@ -12,7 +12,7 @@ export class MemberRoute_member {
     
     // Đăng kí user
     app
-      .route("/v1/api/signup")
+      .route("/v1/api/user/signup")
       .post(
         commonValidateBody(UserCreateSchema),
         this.userController.createUser
@@ -21,23 +21,16 @@ export class MemberRoute_member {
 
     // Đăng nhập user
      app
-      .route("/v1/api/login")
+      .route("/v1/api/user/login")
       .post(
         commonValidateBody(UserLoginSchema),
       	this.userController.loginUser
       );
 
-     // Index
-     app 
-       .route("/v1/api")
-       .post(
-        commonValidateBody(UserLoginSchema),
-        this.userController.loginUser
-        );
 
     // Đăng xuất
      app
-      .route("/v1/api/logout")
+      .route("/v1/api/user/logout")
       .get(
         isAuth,
         this.userController.logoutUser
@@ -45,7 +38,7 @@ export class MemberRoute_member {
 
     // Xem thông tin cá nhân và thay đổi mật khẩu
       app
-      .route("/v1/api/info")
+      .route("/v1/api/user/:id")
       .get(isAuth, this.userController.getUser)
       .patch(
         isAuth,
@@ -55,6 +48,6 @@ export class MemberRoute_member {
 
 
     // Refest token
-     app.route("/v1/api/refresh-token").post(this.userController.refreshToken);
+     app.route("/v1/api/user/refresh-token").post(this.userController.refreshToken);
   }
 }

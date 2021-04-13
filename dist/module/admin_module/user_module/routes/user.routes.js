@@ -14,19 +14,18 @@ class AdminRoute_admin {
         app
             .route("/v1/api/admin/login")
             .post(validatebody_middlewares_1.commonValidateBody(user_dto_1.UserLoginSchema), this.userController.loginUser);
-        // Đăng xuất
         app
             .route("/v1/api/admin/logout")
             .get(auth_middleware_1.isAuth, this.userController.logoutUser);
         // Xem danh sách user (admin)
-        app.route("/v1/api/admin/info").get(auth_middleware_1.isAuth, this.userController.getAllUser);
+        app.route("/v1/api/admin").get(auth_middleware_1.isAuth, this.userController.getAllUser);
         // get, change role, delete user
         app
-            .route("/v1/api/admin/info/:user_id")
+            .route("/v1/api/admin/:user_id")
             .get(auth_middleware_1.isAuth, this.userController.getUserById)
             .delete(auth_middleware_1.isAuth, this.userController.deleteUser);
         // Refest token
-        app.route("/v1/api/refresh-token").post(this.userController.refreshToken);
+        app.route("/v1/api/admin/refresh-token").post(this.userController.refreshToken);
     }
 }
 exports.AdminRoute_admin = AdminRoute_admin;

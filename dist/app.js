@@ -42,7 +42,7 @@ class Applicaction {
         this.routes();
     }
     settings() {
-        this.app.set('port', 4000);
+        this.app.set('port', process.env.PORT || 4000);
     }
     middlewares() {
         this.app.use(morgan_1.default('dev'));
